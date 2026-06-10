@@ -26,7 +26,7 @@ export const psiquiatriaInfantil: ServiceContent = {
     {
       "heading": "Uma página que reúne o cuidado da infância à adolescência",
       "paragraphs": [
-        "A psiquiatria infantil e do adolescente abrange um conjunto amplo de questões: humor, ansiedade, sono, comportamento, atenção, aprendizagem e relações familiares e sociais. Nem sempre é fácil saber se o que você observa faz parte do desenvolvimento ou se merece um olhar especializado, e por isso esta página existe: para oferecer um ponto de partida acolhedor.",
+        "A psiquiatria infantil e do adolescente abrange um conjunto amplo de questões: humor, ansiedade, sono, comportamento, atenção, aprendizagem e relações familiares e sociais. Nem sempre é fácil saber se o que você observa faz parte do desenvolvimento ou se merece um olhar especializado, e por isso esta página existe: para oferecer um ponto de partida claro.",
         "Quando a sua preocupação se conecta a um tema mais específico, há conteúdos dedicados que aprofundam a avaliação e o acompanhamento."
       ],
       "items": [

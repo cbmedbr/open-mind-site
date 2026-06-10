@@ -39,7 +39,7 @@ export default function PrivacidadePage() {
             {site.legal.companyName && (
               <p>
                 {site.legal.companyName}
-                {site.legal.cnpj ? ` — CNPJ ${site.legal.cnpj}.` : "."}
+                {site.legal.cnpj ? `, CNPJ ${site.legal.cnpj}.` : "."}
               </p>
             )}
             <p>

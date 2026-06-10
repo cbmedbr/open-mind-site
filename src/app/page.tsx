@@ -62,9 +62,10 @@ export default function Home() {
       <JsonLd data={medicalClinicLd()} />
 
       {/* 1. Hero — coreografia CSS pura (SDD §5.3 / §6.5) */}
-      <section className="relative overflow-hidden bg-linear-to-b from-petrol-50 to-white">
+      <section className="relative overflow-hidden bg-linear-to-b from-gold-100 to-white">
         <Container className="flex flex-col items-start gap-5 py-20 sm:py-28 lg:py-32">
-          <p className="hero-sub text-eyebrow uppercase text-blue-700">
+          <p className="hero-sub flex items-center gap-2.5 text-eyebrow uppercase text-petrol-700">
+            <span aria-hidden="true" className="h-px w-7 bg-gold-500" />
             Psiquiatria · {site.address.city}/{site.address.state}
           </p>
           <h1 className="hero-title max-w-3xl text-display text-petrol-900">
@@ -74,7 +75,7 @@ export default function Home() {
             {site.tagline}
           </p>
           <p className="hero-sub max-w-readable text-lead text-petrol-700">
-            Cuidado psiquiátrico baseado em evidências, no centro da cidade —
+            Cuidado psiquiátrico baseado em evidências, no centro da cidade,
             para crianças, adolescentes e adultos. Cada plano terapêutico é
             construído para a sua história.
           </p>
@@ -103,7 +104,7 @@ export default function Home() {
       </div>
 
       {/* 3. Serviços em destaque — os 3 carro-chefe (SDD §5.3) */}
-      <Section className="bg-petrol-50">
+      <Section className="bg-gold-100">
         <Container>
           <Reveal>
             <SectionHeader
@@ -148,7 +149,7 @@ export default function Home() {
             {howItWorks.map((step, i) => (
               <Reveal key={step.n} delay={staggerDelay(i)}>
                 <div>
-                  <span className="flex h-12 w-12 items-center justify-center rounded-pill bg-blue-100 font-serif text-xl text-blue-700">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-pill bg-gold-100 font-serif text-xl text-petrol-900">
                     {step.n}
                   </span>
                   <h3 className="mt-4 text-h3 text-petrol-900">{step.title}</h3>
@@ -161,7 +162,7 @@ export default function Home() {
       </Section>
 
       {/* 5. Diferenciais (SDD §5.3 item 5) */}
-      <Section className="bg-petrol-50">
+      <Section className="bg-gold-100">
         <Container>
           <Reveal>
             <SectionHeader
@@ -203,7 +204,7 @@ export default function Home() {
       </Section>
 
       {/* 7. Localização (SDD §5.3) */}
-      <Section className="bg-petrol-50">
+      <Section className="bg-gold-100">
         <Container className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <Reveal>
             <div>

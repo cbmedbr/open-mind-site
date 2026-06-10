@@ -29,7 +29,7 @@ export const site = {
     city: "Florianópolis",
     state: "SC",
     zip: "88010-001",
-    full: "Edifício Pórtico, R. Felipe Schmidt, 515, 2º andar — salas 207 e 208, Centro, Florianópolis/SC, CEP 88010-001",
+    full: "Edifício Pórtico, R. Felipe Schmidt, 515, 2º andar, salas 207 e 208, Centro, Florianópolis/SC, CEP 88010-001",
     mapsQuery:
       "Edifício Pórtico, R. Felipe Schmidt, 515, Centro, Florianópolis - SC, 88010-001",
     /** Geo para JSON-LD/mapa. TODO [PENDENTE]: geocodificar o endereço na F4. */
@@ -60,11 +60,13 @@ export const site = {
     rqe: null as string | null, // TODO [PENDENTE 4]: RQE do RT
   },
 
-  /** Dados jurídicos. TODO [PENDENTE 4]: confirmar com a gestora ANTES de publicar.
-   *  Busca pública (NÃO confirmada): "Openmind Clinica Medica Ltda", CNPJ 59.811.329/0001-85. */
+  /** Dados jurídicos — CONFIRMADOS pela gestão (10/06/2026). PENDENTE 4 resolvido
+   *  nesta parte; falta apenas o CRM-SC/RQE do responsável técnico (Dr. Arthur).
+   *  Obs.: o endereço REGISTRADO é "Sala 207"; o NAP de exibição segue 207 e 208 (SDD §5.6). */
   legal: {
-    companyName: null as string | null,
-    cnpj: null as string | null,
+    companyName: "Openmind Clinica Medica Ltda" as string | null,
+    cnpj: "59.811.329/0001-85" as string | null,
+    foundingDate: "2025-03-10" as string | null,
   },
 
   /** Protocolo de crise (SDD §9.3) — dados públicos, fixos. */

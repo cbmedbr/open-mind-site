@@ -14,7 +14,7 @@ import { physicianLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "Corpo clínico",
   description:
-    "Conheça as psiquiatras da Open Mind em Florianópolis — formação, RQE e áreas de atuação. Atendimento por convênio Unimed e particular.",
+    "Conheça as psiquiatras da Open Mind em Florianópolis: formação, RQE e áreas de atuação. Atendimento por convênio Unimed e particular.",
 };
 
 export default function EquipePage() {

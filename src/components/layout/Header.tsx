@@ -39,7 +39,7 @@ function NavLink({
       <span
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-x-0 -bottom-0.5 h-0.5 origin-left rounded-full bg-blue-500 transition-transform duration-[var(--duration-fast)] ease-brand",
+          "pointer-events-none absolute inset-x-0 -bottom-0.5 h-0.5 origin-left rounded-full bg-gold-500 transition-transform duration-[var(--duration-fast)] ease-brand",
           active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
         )}
       />
@@ -100,7 +100,7 @@ export function Header() {
       >
         <Link
           href="/"
-          aria-label="Open Mind — página inicial"
+          aria-label="Open Mind, página inicial"
           className="rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-petrol-500"
         >
           <Logo animated />
@@ -139,7 +139,7 @@ export function Header() {
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "pointer-events-none absolute inset-x-0 -bottom-0.5 h-0.5 origin-left rounded-full bg-blue-500 transition-transform duration-[var(--duration-fast)] ease-brand",
+                    "pointer-events-none absolute inset-x-0 -bottom-0.5 h-0.5 origin-left rounded-full bg-gold-500 transition-transform duration-[var(--duration-fast)] ease-brand",
                     servicesActive
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100",

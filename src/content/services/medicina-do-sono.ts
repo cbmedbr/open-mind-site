@@ -3,7 +3,7 @@ import type { ServiceContent } from "../types";
 export const medicinaDoSono: ServiceContent = {
   "slug": "medicina-do-sono",
   "h1": "Medicina do Sono em Florianópolis: avaliação e tratamento de insônia",
-  "metaDescription": "Atendimento em medicina do sono em Florianópolis. Avaliação clínica para insônia e outras dificuldades do sono, com acompanhamento individualizado e acolhedor.",
+  "metaDescription": "Atendimento em medicina do sono em Florianópolis. Avaliação clínica para insônia e outras dificuldades do sono, com acompanhamento individualizado e humano.",
   "heroSubtitle": "Se as noites mal dormidas viraram rotina, você não precisa lidar com isso sozinha ou sozinho.",
   "intro": "O sono é parte essencial da sua saúde mental e física, e quando ele não acontece bem, o impacto aparece em quase tudo: na disposição, no humor, na concentração e na forma como você convive com o dia a dia. A medicina do sono é a área que cuida de quem tem dificuldade para dormir, para manter o sono ou para acordar descansado. Na Open Mind, em Florianópolis, você encontra uma avaliação clínica cuidadosa, com escuta qualificada e um olhar individualizado para a sua história e para a sua rotina.",
   "signs": [

@@ -19,6 +19,9 @@ export function medicalClinicLd() {
     email: site.contact.email,
     telephone: `+${site.contact.whatsapp.e164}`,
     medicalSpecialty: "Psychiatric",
+    ...(site.legal.companyName ? { legalName: site.legal.companyName } : {}),
+    ...(site.legal.cnpj ? { taxID: site.legal.cnpj } : {}),
+    ...(site.legal.foundingDate ? { foundingDate: site.legal.foundingDate } : {}),
     address: {
       "@type": "PostalAddress",
       streetAddress: `${site.address.street}, ${site.address.complement}`,

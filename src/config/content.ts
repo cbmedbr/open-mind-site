@@ -22,7 +22,7 @@ export const howItWorks = [
   },
   {
     n: "2",
-    title: "Triagem acolhedora",
+    title: "Triagem atenciosa",
     text: "Entendemos a sua necessidade e orientamos o melhor caminho.",
   },
   {
@@ -40,7 +40,7 @@ export const differentials = [
   },
   {
     title: "Plano individualizado",
-    text: "Cada plano terapêutico é construído para a sua história — não para um diagnóstico genérico.",
+    text: "Cada plano terapêutico é construído para a sua história, não para um diagnóstico genérico.",
   },
   {
     title: "Base em evidências",

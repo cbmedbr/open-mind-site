@@ -10,7 +10,7 @@ export function Differentials() {
       {differentials.map((d, i) => (
         <Reveal key={d.title} delay={staggerDelay(i)}>
           <div className="flex gap-4">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-pill bg-gold-100 text-gold-700">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-pill bg-gold-500 text-petrol-900">
               <CheckIcon className="h-5 w-5" />
             </span>
             <div>

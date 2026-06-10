@@ -20,12 +20,16 @@ export function FinalCTA({
   message,
   pagePath,
   title = "O primeiro passo é uma conversa",
-  text = "Fale com a Open Mind pelo WhatsApp. Atendimento acolhedor, sigiloso e sem compromisso.",
+  text = "Fale com a Open Mind pelo WhatsApp. Atendimento humano, sigiloso e sem compromisso.",
 }: FinalCTAProps) {
   return (
     <Section className="bg-petrol-700">
       <Container className="flex flex-col items-center gap-6 text-center">
         <Reveal>
+          <span
+            aria-hidden="true"
+            className="mx-auto mb-5 block h-1 w-12 rounded-full bg-gold-500"
+          />
           <h2 className="max-w-2xl text-h2 text-white">{title}</h2>
         </Reveal>
         <Reveal delay={staggerDelay(1)}>

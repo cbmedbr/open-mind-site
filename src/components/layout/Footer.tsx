@@ -15,10 +15,10 @@ const institutional = [
 export function Footer() {
   const year = new Date().getFullYear();
   const rt = site.responsibleTechnician;
-  const rtCredential = rt.crm && rt.rqe ? ` — CRM-SC ${rt.crm} · RQE ${rt.rqe}` : "";
+  const rtCredential = rt.crm && rt.rqe ? ` · CRM-SC ${rt.crm} · RQE ${rt.rqe}` : "";
 
   return (
-    <footer className="bg-petrol-700 text-petrol-100">
+    <footer className="border-t-2 border-gold-500 bg-petrol-700 text-petrol-100">
       {/* Linha de crise — sempre visível (SDD §9.3) */}
       <div className="border-b border-white/10">
         <Container className="py-4">
@@ -74,7 +74,7 @@ export function Footer() {
 
         {/* Serviços — linkagem interna de SEO (SDD §4/§10) */}
         <nav aria-label="Serviços">
-          <h2 className="text-eyebrow uppercase text-petrol-50">Serviços</h2>
+          <h2 className="text-eyebrow uppercase text-gold-500">Serviços</h2>
           <ul className="mt-4 space-y-2.5 text-[0.9rem]">
             {services.map((s) => (
               <li key={s.slug}>
@@ -91,7 +91,7 @@ export function Footer() {
 
         {/* Institucional */}
         <nav aria-label="Institucional">
-          <h2 className="text-eyebrow uppercase text-petrol-50">Open Mind</h2>
+          <h2 className="text-eyebrow uppercase text-gold-500">Open Mind</h2>
           <ul className="mt-4 space-y-2.5 text-[0.9rem]">
             {institutional.map((item) => (
               <li key={item.href}>

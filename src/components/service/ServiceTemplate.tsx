@@ -49,7 +49,7 @@ export function ServiceTemplate({ content }: { content: ServiceContent }) {
       <JsonLd data={faqPageLd(content.faq)} />
 
       {/* 1. Hero (SDD §5.1.1) */}
-      <section className="border-b border-petrol-100 bg-linear-to-b from-petrol-50 to-white">
+      <section className="border-b border-petrol-100 bg-linear-to-b from-gold-100 to-white">
         <Container className="py-12 sm:py-16 lg:py-20">
           <Breadcrumbs
             items={[
@@ -107,7 +107,7 @@ export function ServiceTemplate({ content }: { content: ServiceContent }) {
       </Section>
 
       {/* 3. Como funciona o tratamento (SDD §5.1.3) */}
-      <Section className="bg-petrol-50">
+      <Section className="bg-gold-100">
         <Container className="max-w-readable">
           <Reveal>
             <SectionHeader
@@ -160,7 +160,7 @@ export function ServiceTemplate({ content }: { content: ServiceContent }) {
       )}
 
       {/* 4. Diferenciais (SDD §5.1.4) */}
-      <Section className="bg-petrol-50">
+      <Section className="bg-gold-100">
         <Container>
           <Reveal>
             <SectionHeader
@@ -195,7 +195,7 @@ export function ServiceTemplate({ content }: { content: ServiceContent }) {
             ))}
           </div>
           <Reveal className="mt-8">
-            <p className="rounded-card border border-petrol-100 bg-petrol-50 p-4 text-[0.9rem] text-petrol-700">
+            <p className="rounded-card border border-petrol-100 bg-gold-100 p-4 text-[0.9rem] text-petrol-700">
               {reviewedByText(reviewers)} Última revisão: {REVIEW_DATE_LABEL}.
             </p>
           </Reveal>
@@ -204,7 +204,7 @@ export function ServiceTemplate({ content }: { content: ServiceContent }) {
 
       {/* Veja também — linkagem interna de SEO (SDD §10) */}
       {related.length > 0 && (
-        <Section className="bg-petrol-50">
+        <Section className="bg-gold-100">
           <Container>
             <Reveal>
               <SectionHeader eyebrow="Veja também" title="Outras áreas de cuidado" />
@@ -236,7 +236,7 @@ export function ServiceTemplate({ content }: { content: ServiceContent }) {
       </Section>
 
       {/* Bloco resumido de localização (SDD §5.1.7) */}
-      <Section className="bg-petrol-50">
+      <Section className="bg-gold-100">
         <Container className="flex flex-col items-start gap-4">
           <p className="flex items-start gap-2 text-petrol-700">
             <PinIcon className="mt-1 h-5 w-5 shrink-0 text-petrol-500" />

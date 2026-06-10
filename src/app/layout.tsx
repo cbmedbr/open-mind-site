@@ -11,7 +11,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url), // TODO [PENDENTE 1]: domínio definitivo
   title: {
-    default: `${site.seoName} — Psiquiatria humanizada em Florianópolis`,
+    default: `${site.name} · Psiquiatria humanizada em Florianópolis`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: site.name,
-    title: `${site.seoName} — Psiquiatria humanizada em Florianópolis`,
+    title: `${site.name} · Psiquiatria humanizada em Florianópolis`,
     description: site.description,
     url: site.url,
   },

@@ -13,7 +13,7 @@ interface PageHeaderProps {
  */
 export function PageHeader({ title, lead, breadcrumbs }: PageHeaderProps) {
   return (
-    <section className="border-b border-petrol-100 bg-petrol-50">
+    <section className="border-b border-petrol-100 bg-gold-100">
       <Container className="py-12 sm:py-16">
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="hero-title mt-5 max-w-3xl text-h1 text-petrol-900">

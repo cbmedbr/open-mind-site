@@ -5,7 +5,7 @@ export const saudeMentalDaMulher: ServiceContent = {
   "h1": "Psiquiatra para Saúde Mental da Mulher em Florianópolis",
   "metaDescription": "Atendimento psiquiátrico para a saúde mental da mulher em Florianópolis, em diferentes fases da vida, com escuta cuidadosa e plano individualizado.",
   "heroSubtitle": "A sua história e o momento de vida que você atravessa orientam um cuidado pensado para você.",
-  "intro": "A vida de uma mulher passa por muitas fases, e cada uma traz demandas próprias para a saúde mental. Da juventude à maturidade, das transformações hormonais às mudanças de rotina, de trabalho e de relações, é comum que o equilíbrio emocional oscile ao longo do tempo. Na Open Mind, em Florianópolis, você encontra um espaço de psiquiatria que acolhe a mulher de forma ampla, considerando o seu contexto, a sua história e o momento que você vive agora. O cuidado começa por uma escuta atenta, sem pressa e sem julgamento, para entender o que faz sentido para você.",
+  "intro": "A vida de uma mulher passa por muitas fases, e cada uma traz demandas próprias para a saúde mental. Da juventude à maturidade, das transformações hormonais às mudanças de rotina, de trabalho e de relações, é comum que o equilíbrio emocional oscile ao longo do tempo. Na Open Mind, em Florianópolis, você encontra um espaço de psiquiatria que cuida da mulher de forma ampla, considerando o seu contexto, a sua história e o momento que você vive agora. O cuidado começa por uma escuta atenta, sem pressa e sem julgamento, para entender o que faz sentido para você.",
   "signs": [
     "Você sente que a ansiedade, a irritabilidade ou a tristeza têm ocupado mais espaço do que gostaria no dia a dia.",
     "Mudanças de humor acompanham determinadas fases do seu ciclo, da gestação, do pós-parto ou de outros momentos de transição.",
@@ -41,7 +41,7 @@ export const saudeMentalDaMulher: ServiceContent = {
       "heading": "Um cuidado que respeita o seu tempo",
       "paragraphs": [
         "Procurar ajuda em saúde mental é uma decisão pessoal, e não existe momento certo único para isso. Você pode buscar apoio para entender melhor o que sente, para acompanhar uma fase mais difícil ou simplesmente para cuidar de si com mais atenção.",
-        "Na Open Mind, o atendimento acontece com sigilo e discrição, em um ambiente acolhedor no centro de Florianópolis. O primeiro passo é uma conversa, no seu ritmo, sem cobranças."
+        "Na Open Mind, o atendimento acontece com sigilo e discrição, em um ambiente tranquilo no centro de Florianópolis. O primeiro passo é uma conversa, no seu ritmo, sem cobranças."
       ]
     }
   ],
@@ -64,7 +64,7 @@ export const saudeMentalDaMulher: ServiceContent = {
     },
     {
       "question": "A Open Mind atende por convênio?",
-      "answer": "A clínica atende por convênio Unimed e também na modalidade particular. Você pode confirmar os detalhes e tirar suas dúvidas pelo WhatsApp antes de agendar. O primeiro contato é uma conversa acolhedora, no seu tempo."
+      "answer": "A clínica atende por convênio Unimed e também na modalidade particular. Você pode confirmar os detalhes e tirar suas dúvidas pelo WhatsApp antes de agendar. O primeiro contato é uma conversa atenciosa, no seu tempo."
     },
     {
       "question": "Em quanto tempo vou perceber melhora?",

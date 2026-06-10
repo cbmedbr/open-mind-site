@@ -46,7 +46,7 @@ export const ansiedadeEBurnout: ServiceContent = {
     },
     {
       "question": "Preciso de encaminhamento para marcar uma consulta?",
-      "answer": "Não é necessário encaminhamento para agendar uma consulta de psiquiatria na Open Mind. Você pode iniciar o contato diretamente pelo WhatsApp, e a triagem acolhedora ajuda a organizar o primeiro atendimento conforme a sua disponibilidade."
+      "answer": "Não é necessário encaminhamento para agendar uma consulta de psiquiatria na Open Mind. Você pode iniciar o contato diretamente pelo WhatsApp, e a triagem cuidadosa ajuda a organizar o primeiro atendimento conforme a sua disponibilidade."
     },
     {
       "question": "Como funciona a primeira consulta?",

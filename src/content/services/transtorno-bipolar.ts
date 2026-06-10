@@ -34,7 +34,7 @@ export const transtornoBipolar: ServiceContent = {
       "heading": "Você não precisa enfrentar isso sozinho",
       "paragraphs": [
         "Conviver com oscilações de humor pode ser cansativo, e procurar acompanhamento é um passo de cuidado consigo. Se você está num momento difícil, saiba que existe ajuda disponível e que dá para construir o cuidado com apoio.",
-        "O primeiro contato com a Open Mind é uma conversa acolhedora, sem julgamento. A partir dela, é possível organizar os próximos passos no seu ritmo."
+        "O primeiro contato com a Open Mind é uma conversa tranquila, sem julgamento. A partir dela, é possível organizar os próximos passos no seu ritmo."
       ],
       "items": []
     }
@@ -54,7 +54,7 @@ export const transtornoBipolar: ServiceContent = {
     },
     {
       "question": "Preciso de encaminhamento para marcar?",
-      "answer": "Não é necessário encaminhamento. O primeiro passo é uma conversa pelo WhatsApp para uma triagem acolhedora, que ajuda a organizar o agendamento da sua avaliação."
+      "answer": "Não é necessário encaminhamento. O primeiro passo é uma conversa pelo WhatsApp para uma triagem cuidadosa, que ajuda a organizar o agendamento da sua avaliação."
     },
     {
       "question": "O atendimento é sigiloso?",

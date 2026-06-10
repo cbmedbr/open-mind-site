@@ -62,7 +62,7 @@ export default function SobrePage() {
                 qualificada e planos construídos caso a caso.
               </p>
               <p className="mt-4 text-petrol-700">
-                Aqui, o primeiro passo é uma conversa — acolhedora e sigilosa —,
+                Aqui, o primeiro passo é uma conversa atenciosa e sigilosa,
                 não um formulário. O objetivo é simples: oferecer um cuidado
                 premium, humano e baseado em evidências.
               </p>
@@ -76,7 +76,7 @@ export default function SobrePage() {
       </Section>
 
       {/* Filosofia de cuidado (SDD §5.4) */}
-      <Section className="bg-petrol-50">
+      <Section className="bg-gold-100">
         <Container>
           <Reveal>
             <SectionHeader
@@ -104,7 +104,7 @@ export default function SobrePage() {
             <SectionHeader
               eyebrow="O espaço"
               title="No coração do Centro"
-              lead={`${site.address.building}, ${site.address.district}, em um ambiente pensado para ser acolhedor e discreto.`}
+              lead={`${site.address.building}, ${site.address.district}, em um ambiente pensado para ser tranquilo e discreto.`}
             />
           </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
@@ -117,7 +117,7 @@ export default function SobrePage() {
       </Section>
 
       {/* Valores (SDD §5.4 / §2) */}
-      <Section className="bg-petrol-50">
+      <Section className="bg-gold-100">
         <Container>
           <Reveal>
             <SectionHeader eyebrow="Valores" title="O que nos guia" />
