@@ -13,9 +13,13 @@ export const site = {
   description:
     "Clínica de psiquiatria humanizada e baseada em evidências, no centro de Florianópolis.",
 
-  /** Domínio. PLACEHOLDER — TODO [PENDENTE 1]: registrar/confirmar antes do go-live (F4).
-   *  Candidatos (SDD §12): openmindpsiquiatria.com.br, clinicaopenmind.com.br, openmindclinica.com.br */
-  url: "https://openmindpsiquiatria.com.br",
+  /** Domínio. TODO [PENDENTE 1]: candidato NÃO confirmado (SDD §12 — checar no registro.br:
+   *  openmindpsiquiatria.com.br, clinicaopenmind.com.br, openmindclinica.com.br).
+   *  Na F4/produção, definir NEXT_PUBLIC_SITE_URL com o domínio real ANTES do build; o
+   *  valor abaixo é só fallback de desenvolvimento e não deve ir a produção em
+   *  JSON-LD/canonical (pode pertencer a terceiro). */
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://openmindpsiquiatria.com.br",
 
   address: {
     building: "Edifício Pórtico",

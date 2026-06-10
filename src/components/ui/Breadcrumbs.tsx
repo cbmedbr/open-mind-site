@@ -33,7 +33,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
                 </span>
               )}
               {!isLast && (
-                <span aria-hidden="true" className="text-petrol-500">
+                <span aria-hidden="true" className="text-petrol-700">
                   /
                 </span>
               )}

@@ -2,24 +2,23 @@ import Link from "next/link";
 import { site, whatsappMessages } from "@/config/site";
 import { featuredServices } from "@/config/services";
 import { team } from "@/config/team";
+import { brandAttributes, howItWorks } from "@/config/content";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { TeamCard } from "@/components/ui/TeamCard";
 import { MapEmbed } from "@/components/ui/MapEmbed";
 import { CTAWhatsApp } from "@/components/ui/CTAWhatsApp";
+import { Differentials } from "@/components/ui/Differentials";
+import { FinalCTA } from "@/components/ui/FinalCTA";
+import { FAQAccordion } from "@/components/ui/FAQAccordion";
+import { JsonLd } from "@/components/ui/JsonLd";
 import { buttonClass } from "@/components/ui/Button";
+import { PinIcon, ArrowRightIcon } from "@/components/ui/icons";
 import { staggerDelay } from "@/lib/motion";
-import { PinIcon } from "@/components/ui/icons";
-
-const brandAttributes = [
-  "Acolhedora",
-  "Científica",
-  "Discreta",
-  "Humanizada",
-  "Especializada",
-];
+import { medicalClinicLd } from "@/lib/jsonld";
 
 // Blurbs curtos e conservadores (sem promessa clínica) — a copy completa é da F3.
 const featuredBlurbs: Record<string, string> = {
@@ -30,41 +29,56 @@ const featuredBlurbs: Record<string, string> = {
     "Avaliação clínica e tratamento dos distúrbios do sono, como a insônia.",
 };
 
-const steps = [
+const ageSentence = (() => {
+  const by = Object.fromEntries(team.map((m) => [m.slug, m]));
+  return `Atendemos a partir dos ${by["patricia"].ageMin} anos com a ${by["patricia"].shortName}; a ${by["ana-beatriz"].shortName} atende a partir dos ${by["ana-beatriz"].ageMin} anos e a ${by["angela"].shortName}, a partir dos ${by["angela"].ageMin} anos.`;
+})();
+
+const faq = [
   {
-    n: "1",
-    title: "Você chama no WhatsApp",
-    text: "O primeiro passo é uma conversa, não um formulário.",
+    question: "A Open Mind atende por convênio?",
+    answer:
+      "Atendemos pelo convênio Unimed e também em modalidade particular.",
   },
   {
-    n: "2",
-    title: "Triagem acolhedora",
-    text: "Entendemos sua necessidade e orientamos o melhor caminho.",
+    question: "Como é a primeira consulta?",
+    answer:
+      "É uma avaliação cuidadosa: a médica escuta a sua história, entende as suas necessidades e, junto com você, define os próximos passos do cuidado.",
   },
   {
-    n: "3",
-    title: "Consulta agendada",
-    text: "Atendimento por convênio Unimed ou particular.",
+    question: "A partir de que idade vocês atendem?",
+    answer: ageSentence,
+  },
+  {
+    question: "O atendimento é sigiloso?",
+    answer:
+      "Sim. O sigilo médico é a base do cuidado: as suas informações são tratadas com total confidencialidade.",
   },
 ];
 
 export default function Home() {
   return (
     <>
-      {/* Hero — coreografia CSS pura (SDD §5.3 / §6.5) */}
+      <JsonLd data={medicalClinicLd()} />
+
+      {/* 1. Hero — coreografia CSS pura (SDD §5.3 / §6.5) */}
       <section className="relative overflow-hidden bg-linear-to-b from-petrol-50 to-white">
-        <Container className="flex flex-col items-start gap-6 py-20 sm:py-28 lg:py-32">
+        <Container className="flex flex-col items-start gap-5 py-20 sm:py-28 lg:py-32">
           <p className="hero-sub text-eyebrow uppercase text-blue-700">
-            Open Mind · {site.address.city}/{site.address.state}
+            Psiquiatria · {site.address.city}/{site.address.state}
           </p>
           <h1 className="hero-title max-w-3xl text-display text-petrol-900">
             Psiquiatria humanizada em Florianópolis
           </h1>
-          <p className="hero-sub max-w-readable text-lead text-petrol-700">
-            Cuidado psiquiátrico baseado em evidências, no centro da cidade. Cada
-            plano terapêutico é construído para a história de cada paciente.
+          <p className="hero-sub max-w-readable font-serif text-lead italic text-petrol-700">
+            {site.tagline}
           </p>
-          <div className="hero-cta mt-2 flex flex-col gap-3 sm:flex-row">
+          <p className="hero-sub max-w-readable text-lead text-petrol-700">
+            Cuidado psiquiátrico baseado em evidências, no centro da cidade —
+            para crianças, adolescentes e adultos. Cada plano terapêutico é
+            construído para a sua história.
+          </p>
+          <div className="hero-cta mt-3 flex flex-col gap-3 sm:flex-row">
             <CTAWhatsApp
               message={whatsappMessages.default}
               pagePath="/"
@@ -77,30 +91,26 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Faixa de confiança — atributos de marca (sem números inventados, SDD §5.3) */}
+      {/* 2. Faixa de confiança — atributos de marca, sem números inventados (SDD §5.3) */}
       <div className="border-y border-petrol-100 bg-white">
         <Container className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 py-6">
           {brandAttributes.map((attr) => (
-            <span
-              key={attr}
-              className="text-eyebrow uppercase text-petrol-500"
-            >
+            <span key={attr} className="text-eyebrow uppercase text-petrol-700">
               {attr}
             </span>
           ))}
         </Container>
       </div>
 
-      {/* Serviços em destaque — os 3 carro-chefe (SDD §5.3) */}
+      {/* 3. Serviços em destaque — os 3 carro-chefe (SDD §5.3) */}
       <Section className="bg-petrol-50">
         <Container>
           <Reveal>
-            <div className="max-w-readable">
-              <h2 className="text-h2 text-petrol-900">Áreas de cuidado</h2>
-              <p className="mt-3 text-petrol-700">
-                Atendimento especializado para crianças, adolescentes e adultos.
-              </p>
-            </div>
+            <SectionHeader
+              eyebrow="Áreas de cuidado"
+              title="Atendimento especializado por necessidade"
+              lead="Para crianças, adolescentes e adultos, com a profissional certa para cada caso."
+            />
           </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {featuredServices.map((s, i) => (
@@ -119,19 +129,23 @@ export default function Home() {
               className="inline-flex items-center gap-1.5 font-medium text-blue-700 underline-offset-4 hover:underline"
             >
               Ver todos os serviços
+              <ArrowRightIcon className="h-4 w-4" />
             </Link>
           </Reveal>
         </Container>
       </Section>
 
-      {/* Como funciona — 3 passos (SDD §5.3) */}
+      {/* 4. Como funciona — 3 passos (SDD §5.3) */}
       <Section>
         <Container>
           <Reveal>
-            <h2 className="text-h2 text-petrol-900">Como funciona</h2>
+            <SectionHeader
+              eyebrow="Como funciona"
+              title="Do WhatsApp à consulta, em poucos passos"
+            />
           </Reveal>
           <div className="mt-10 grid gap-8 sm:grid-cols-3">
-            {steps.map((step, i) => (
+            {howItWorks.map((step, i) => (
               <Reveal key={step.n} delay={staggerDelay(i)}>
                 <div>
                   <span className="flex h-12 w-12 items-center justify-center rounded-pill bg-blue-100 font-serif text-xl text-blue-700">
@@ -146,12 +160,30 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* Equipe (teaser) — fotos com placeholder (SDD §5.3 / PENDENTE 3) */}
+      {/* 5. Diferenciais (SDD §5.3 item 5) */}
       <Section className="bg-petrol-50">
         <Container>
           <Reveal>
+            <SectionHeader
+              eyebrow="Por que a Open Mind"
+              title="Um cuidado que começa pela escuta"
+            />
+          </Reveal>
+          <div className="mt-10">
+            <Differentials />
+          </div>
+        </Container>
+      </Section>
+
+      {/* 6. Equipe (teaser) — fotos com placeholder (SDD §5.3 / PENDENTE 3) */}
+      <Section>
+        <Container>
+          <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2 className="text-h2 text-petrol-900">Corpo clínico</h2>
+              <SectionHeader
+                eyebrow="Corpo clínico"
+                title="Psiquiatras especializadas"
+              />
               <Link
                 href="/equipe"
                 className="font-medium text-blue-700 underline-offset-4 hover:underline"
@@ -170,19 +202,18 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* Localização (SDD §5.3) */}
-      <Section>
+      {/* 7. Localização (SDD §5.3) */}
+      <Section className="bg-petrol-50">
         <Container className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <Reveal>
             <div>
-              <h2 className="text-h2 text-petrol-900">Onde estamos</h2>
-              <p className="mt-4 flex items-start gap-2 text-petrol-700">
+              <SectionHeader eyebrow="Onde estamos" title="No centro de Florianópolis" />
+              <p className="mt-5 flex items-start gap-2 text-petrol-700">
                 <PinIcon className="mt-1 h-5 w-5 shrink-0 text-petrol-500" />
                 <span>{site.address.full}</span>
               </p>
               <p className="mt-2 text-petrol-700">
-                {site.address.building} · {site.address.district}, no centro de
-                Florianópolis.
+                {site.address.building} · {site.address.district}.
               </p>
               <div className="mt-6">
                 <Link href="/contato" className={buttonClass("secondary", "md")}>
@@ -197,29 +228,20 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* CTA final (SDD §5.3) */}
-      <Section className="bg-petrol-700">
-        <Container className="flex flex-col items-center gap-6 text-center">
+      {/* 8. FAQ geral (SDD §5.3) — sem telemedicina na v1 */}
+      <Section>
+        <Container className="max-w-3xl">
           <Reveal>
-            <h2 className="max-w-2xl text-h2 text-white">
-              O primeiro passo é uma conversa
-            </h2>
+            <SectionHeader eyebrow="Perguntas frequentes" title="Tudo bem ter dúvidas" />
           </Reveal>
-          <Reveal delay={staggerDelay(1)}>
-            <p className="max-w-readable text-petrol-100">
-              Fale com a Open Mind pelo WhatsApp. Atendimento acolhedor,
-              sigiloso e sem compromisso.
-            </p>
-          </Reveal>
-          <Reveal delay={staggerDelay(2)}>
-            <CTAWhatsApp
-              message={whatsappMessages.default}
-              pagePath="/"
-              ctaPosition="cta-final"
-            />
+          <Reveal delay={staggerDelay(1)} className="mt-8">
+            <FAQAccordion items={faq} />
           </Reveal>
         </Container>
       </Section>
+
+      {/* 9. CTA final (SDD §5.3) */}
+      <FinalCTA message={whatsappMessages.default} pagePath="/" />
     </>
   );
 }
