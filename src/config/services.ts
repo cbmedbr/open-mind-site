@@ -160,3 +160,19 @@ export function getService(slug: string): ServiceMeta | undefined {
 }
 
 export const featuredServices = services.filter((s) => s.featured);
+
+/** Cross-linking interno de SEO (SDD §10): psiquiatria-infantil ↔ tea/tdah, etc. */
+const relatedSlugs: Record<string, string[]> = {
+  "psiquiatria-infantil": ["tea", "tdah"],
+  tea: ["psiquiatria-infantil"],
+  tdah: ["psiquiatria-infantil"],
+  depressao: ["transtorno-bipolar", "ansiedade-e-burnout"],
+  "transtorno-bipolar": ["depressao"],
+  "ansiedade-e-burnout": ["depressao"],
+};
+
+export function getRelatedServices(slug: string): ServiceMeta[] {
+  return (relatedSlugs[slug] ?? [])
+    .map((s) => serviceBySlug[s])
+    .filter(Boolean);
+}
