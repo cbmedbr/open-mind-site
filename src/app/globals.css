@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+/* =============================================================================
+   Open Mind — Design tokens (SDD §6.2 cores, §6.4 tipografia, §6.5 motion)
+   Fonte única. Nenhum valor mágico de cor, tamanho, tempo ou easing fora daqui.
+   ========================================================================== */
+
+@theme {
+  /* --- Paleta oficial (SDD §6.2) ----------------------------------------- */
+  /* Estrutura (petróleo) */
+  --color-petrol-900: #1e333c; /* títulos sobre claro; texto sobre dourado */
+  --color-petrol-700: #2e4e5d; /* base: header, footer, links, blocos */
+  --color-petrol-500: #627a85; /* ícones, bordas fortes, texto de apoio */
+  --color-petrol-100: #e6eaec; /* divisores, bordas suaves */
+  --color-petrol-50: #f4f7f8; /* fundo dominante (os 60%) */
+  /* Apoio (azul claro) — APENAS estes 3 passos são da marca (não usar outros azuis do Tailwind) */
+  --color-blue-700: #426e85; /* texto/ícones sobre blue-100 */
+  --color-blue-500: #5e9dbe; /* base: apoio decorativo, hovers */
+  --color-blue-100: #dfebf2; /* fundos de seção alternados */
+  /* Acento (dourado) — reservado a CTA primário e micro-destaques (os 10%) */
+  --color-gold-700: #ae9257; /* hover/pressed do CTA */
+  --color-gold-500: #d9b76d; /* base: CTA primário */
+  --color-gold-100: #f7f1e2; /* selos e fundos sutis de destaque */
+  /* Texto corrido */
+  --color-ink: #2a3b43;
+  /* Superfície base (os 60%) */
+  --color-background: #ffffff;
+  /* Verde de marca do WhatsApp (asset externo; reconhecibilidade do FAB) */
+  --color-whatsapp: #25d366;
+
+  /* --- Tipografia (SDD §6.4) — escala major third, base 16 --------------- */
+  /* h1 40–44 desktop / 32 mobile via clamp; line-height e tracking embutidos */
+  --text-eyebrow: 0.8125rem; /* 13px — rótulos/uppercase */
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.08em;
+  --text-eyebrow--font-weight: 600;
+
+  --text-body: 1.0625rem; /* 17px */
+  --text-body--line-height: 1.65;
+
+  --text-lead: 1.1875rem; /* 19px — subtítulos/lead */
+  --text-lead--line-height: 1.6;
+
+  --text-h3: 1.5rem; /* 24px */
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.01em;
+
+  --text-h2: 2rem; /* 32px */
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.015em;
+
+  --text-h1: clamp(2rem, 1.2rem + 3.4vw, 2.75rem); /* 32 → 44 */
+  --text-h1--line-height: 1.14;
+  --text-h1--letter-spacing: -0.02em;
+
+  --text-display: clamp(2.5rem, 1.4rem + 4.6vw, 3.5rem); /* hero */
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.025em;
+
+  /* Largura de leitura confortável (65–75 caracteres, SDD §6.4) */
+  --container-readable: 72ch;
+
+  /* --- Raio e sombra (premium, contido) --------------------------------- */
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+  --shadow-soft: 0 1px 2px rgb(30 51 60 / 0.04), 0 8px 24px -12px rgb(30 51 60 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(30 51 60 / 0.06), 0 16px 40px -16px rgb(30 51 60 / 0.18);
+  --shadow-gold: 0 8px 24px -10px rgb(174 146 87 / 0.45);
+
+  /* --- Motion (SDD §6.5) — easings expostos como utilitários ------------- */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1); /* curva padrão de entrada */
+}
+
+/* Famílias self-hosted via next/font (variáveis definidas no <html>).
+   inline → Tailwind escreve var(--font-*) direto nas utilities. */
+@theme inline {
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif; /* corpo */
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif; /* títulos */
+}
+
+/* =============================================================================
+   Tokens de movimento e tempo (SDD §6.5). Espelhados em src/lib/motion.ts
+   para as animações JS (Motion). Mesma fonte conceitual.
+   ========================================================================== */
+:root {
+  --duration-fast: 150ms; /* hovers, cores, links */
+  --duration-base: 250ms; /* botões, cards, accordion */
+  --duration-entrance: 600ms; /* reveals de seção */
+  --duration-hero: 900ms; /* coreografia do hero */
+  --duration-signature: 1200ms; /* assinatura do logo (única > 900ms) */
+  --stagger: 80ms; /* listas e grids */
+  --distance: 20px; /* translate máximo de entrada (16–24px) */
+
+  scroll-behavior: smooth;
+}
+
+/* =============================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-serif);
+    color: var(--color-petrol-900);
+    font-weight: 560; /* SDD §6.4: 500–600, nunca 700+ */
+    font-optical-sizing: auto; /* usa o eixo óptico da Fraunces */
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Acessibilidade: foco sempre visível (SDD §6.3 / WCAG AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-petrol-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-gold-100);
+    color: var(--color-petrol-900);
+  }
+
+  /* Alvos de toque ≥ 44px garantidos via componentes; respiro padrão de seção */
+}
+
+/* =============================================================================
+   Assinatura animada do logo (SDD §6.5)
+   - 1ª carga da sessão: as 3 peças se encaixam (transform/opacity, ~1,2s).
+   - Decisão tomada ANTES da pintura por um script inline (sem flash, sem CLS):
+     <html class="logo-static"> => peças já montadas, sem animação.
+   - prefers-reduced-motion: sempre montado.
+   ========================================================================== */
+.logo-piece {
+  opacity: 0;
+  transform: translate(var(--lp-x, 0), var(--lp-y, 0)) scale(0.82);
+  animation: logo-assemble var(--duration-signature) var(--ease-brand) forwards;
+  animation-delay: var(--lp-delay, 0ms);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes logo-assemble {
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Carga já vista nesta sessão OU sem JS de animação: montado e estático */
+html.logo-static .logo-piece {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+/* =============================================================================
+   Coreografia do hero (SDD §6.5) — CSS puro, disparado no load, sem esperar JS.
+   O título (LCP) anima só transform, opacidade sempre 1 → nunca fica invisível
+   e o texto é legível durante toda a entrada (regras 4 e 7).
+   ========================================================================== */
+.hero-title {
+  animation: hero-rise var(--duration-hero) var(--ease-brand) both;
+}
+.hero-sub {
+  animation: hero-fade-up var(--duration-entrance) var(--ease-brand) 100ms both;
+}
+.hero-cta {
+  animation: hero-pop var(--duration-base) var(--ease-brand) 200ms both;
+}
+@keyframes hero-rise {
+  from {
+    transform: translateY(12px);
+  }
+}
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes hero-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+/* =============================================================================
+   Transição entre páginas — cross-fade 200ms (SDD §6.5). Fallback: sem transição.
+   ========================================================================== */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-fast); /* 150ms exit / 200ms enter abaixo */
+}
+::view-transition-old(root) {
+  animation: var(--duration-fast) var(--ease-brand) both vt-fade-out;
+}
+::view-transition-new(root) {
+  animation: 200ms var(--ease-brand) both vt-fade-in;
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* =============================================================================
+   prefers-reduced-motion (SDD §6.5, regra inegociável nº1)
+   Desliga TUDO: conteúdo aparece pronto (no máximo opacidade).
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .logo-piece {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
