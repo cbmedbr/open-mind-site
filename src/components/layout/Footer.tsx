@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { site } from "@/config/site";
-import { services } from "@/config/services";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { PinIcon } from "@/components/ui/icons";
@@ -28,7 +27,7 @@ export function Footer() {
         </Container>
       </div>
 
-      <Container className="grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+      <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr]">
         {/* Marca + NAP */}
         <div>
           <Logo tone="light" />
@@ -71,23 +70,6 @@ export function Footer() {
             </span>
           </address>
         </div>
-
-        {/* Serviços — linkagem interna de SEO (SDD §4/§10) */}
-        <nav aria-label="Serviços">
-          <h2 className="text-eyebrow uppercase text-gold-500">Serviços</h2>
-          <ul className="mt-4 space-y-2.5 text-[0.9rem]">
-            {services.map((s) => (
-              <li key={s.slug}>
-                <Link
-                  href={s.path}
-                  className="text-petrol-100/90 underline-offset-2 hover:text-white hover:underline"
-                >
-                  {s.navLabel}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
 
         {/* Institucional */}
         <nav aria-label="Institucional">

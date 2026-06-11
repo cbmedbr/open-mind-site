@@ -1,32 +1,35 @@
 # SDD: Site Institucional Open Mind (Clínica de Psiquiatria)
 
-**Versão:** 1.0 (aprovada para build)
+**Versão:** 1.1 (escopo simplificado: site institucional tipo cartão de visitas)
 **Data:** 10/06/2026
-**Status:** pronto para execução das fases F1 a F3. A F4 (go-live) aguarda as pendências 1 (domínio), 4 (CNPJ e registro do RT) e 9 (horários). Itens **[PENDENTE]** viram placeholders no build, conforme a seção 13.
+**Status:** site já construído e em preview na Vercel (open-mind-site-three.vercel.app). Esta versão registra a simplificação de escopo pedida em 10/06/2026 e orienta o refactor.
+**Mudança da v1.0 para a v1.1:** removidas as 10 páginas de serviço e o hub `/servicos`. O site passa a ser institucional enxuto (info da clínica, corpo clínico, contato), com as patologias atendidas listadas de forma simples, sem páginas nem copy longa por condição. A especificação detalhada das páginas de serviço fica preservada no histórico de versões caso a estratégia de SEO por condição seja retomada no futuro.
 **Como usar:** este documento é a fonte da verdade do projeto. O agente de build (Claude Code) deve ler o documento inteiro e seguir as instruções da seção 13.
 
 ---
 
 ## 1. Visão geral e objetivos
 
-**Produto:** site institucional da Open Mind, clínica de psiquiatria em Florianópolis/SC (Centro), com foco em captação orgânica (SEO local) e conversão via WhatsApp.
+**Produto:** site institucional enxuto da Open Mind, clínica de psiquiatria em Florianópolis/SC (Centro). Funciona como um cartão de visitas digital: apresenta a clínica, o corpo clínico e o contato, com conversão via WhatsApp.
 
 **Objetivos de negócio**
-1. Captar novos pacientes via busca orgânica e tráfego direto.
-2. Reativar pacientes antigos para acompanhamento contínuo (objetivo de negócio; o canal de reativação, e-mail ou WhatsApp em massa, fica fora da v1, ver "Fora de escopo").
+1. Apresentar a clínica e o corpo clínico com credibilidade e visual premium.
+2. Converter quem chega ao site em conversa de triagem pelo WhatsApp.
 3. Sustentar percepção premium da marca: acolhedora, científica, discreta, humanizada, especializada.
 4. Jornada ágil: de qualquer página até a conversa de triagem no WhatsApp em no máximo 2 toques.
+
+Nota: a captação por busca orgânica passa a depender de Google Business Profile, Instagram e indicação. O site dá suporte de SEO básico (marca, home, NAP), mas não rankeia por condição como rankearia com uma página por patologia.
 
 **KPIs**
 
 | KPI | Meta inicial | Medição |
 |---|---|---|
 | Taxa de clique no CTA WhatsApp (cliques / sessões) | >= 8% | GA4, evento `whatsapp_click` |
-| Agendamentos atribuídos ao site | acompanhar na triagem | mensagem pré-preenchida identifica a página de origem |
-| Posição orgânica nos termos-alvo (seção 10) | top 10 em 6 meses | Search Console |
+| Agendamentos atribuídos ao site | acompanhar na triagem | mensagem pré-preenchida do WhatsApp |
+| Presença de marca (busca por "Open Mind Florianópolis") | aparecer no topo | Search Console + GBP |
 | Performance (LCP mobile) | < 2,5 s | Lighthouse / CrUX |
 
-**Fora de escopo da v1:** blog, widget de agendamento MedScale, telemedicina embedada, área do paciente, CRM, automação de triagem (bot/n8n), canal de reativação de pacientes (e-mail/WhatsApp em massa), tráfego pago (Meta Pixel/Google Ads), página de dependência química (sem profissional que atenda hoje; reentra quando houver), multi-idioma, CMS. A estrutura fica preparada para receber blog e botão "Agendar online" (MedScale) no futuro sem retrabalho de layout.
+**Fora de escopo da v1:** páginas de serviço por condição e hub `/servicos` (removidos na v1.1), blog, widget de agendamento MedScale, telemedicina embedada, área do paciente, CRM, automação de triagem (bot/n8n), canal de reativação de pacientes (e-mail/WhatsApp em massa), tráfego pago (Meta Pixel/Google Ads), multi-idioma, CMS.
 
 ---
 
@@ -76,65 +79,42 @@ Evitar: promessa de cura ou de resultado, sensacionalismo, apelo ao medo ou à c
 ## 4. Arquitetura de informação
 
 ```
-/                       Home
+/                       Home (inclui o bloco "O que atendemos")
 /sobre                  Sobre a clínica
 /equipe                 Corpo clínico
 /contato                Contato e localização
 /privacidade            Política de privacidade
-/servicos               Hub de serviços
-  /tea                  Transtorno do Espectro Autista
-  /tdah                 TDAH e TOD
-  /canabidiol           Tratamento com canabidiol
-  /medicina-do-sono     Medicina do Sono
-  /psiquiatria-infantil Psiquiatria Infantil e do Adolescente
-  /ansiedade-e-burnout  Ansiedade, Estresse e Burnout
-  /depressao            Depressão e Luto
-  /transtorno-bipolar   Transtorno Bipolar e do Humor
-  /saude-mental-da-mulher  Saúde Mental da Mulher
-  /pericia-medica       Perícia Médica em Saúde Mental
 ```
 
-**Header (desktop):** logo, Sobre, Serviços (dropdown com as 10 páginas), Equipe, Contato, botão destacado "Falar no WhatsApp".
+As patologias e serviços atendidos aparecem como um bloco simples na Home (e podem ser ecoados em /sobre), sem páginas dedicadas nem copy longa. Lista a exibir: Transtorno do Espectro Autista (TEA), TDAH e TOD, Psiquiatria infantil e do adolescente, Ansiedade, estresse e burnout, Depressão e luto, Transtorno bipolar e do humor, Distúrbios do sono (medicina do sono), Saúde mental da mulher, Tratamento com canabidiol (avaliação e acompanhamento médico), Perícia médica em saúde mental.
+
+**Header (desktop):** logo, Sobre, Equipe, Contato, botão destacado "Falar no WhatsApp". Sem dropdown de serviços.
 **Header (mobile):** logo + hambúrguer; botão flutuante de WhatsApp (FAB) fixo em todas as páginas.
-**Footer:** NAP completo (nome, endereço, telefone), e-mail e Instagram oficiais, razão social e CNPJ **[PENDENTE: confirmar]**, responsável técnico (Dr. Arthur de Freitas Andrade) com CRM/RQE **[PENDENTE: registro dele]**, links para todos os serviços (linkagem interna de SEO), política de privacidade e linha de crise (CVV 188).
+**Footer:** NAP completo (nome, endereço, telefone), e-mail e Instagram oficiais, razão social e CNPJ **[PENDENTE: confirmar]**, responsável técnico (Dr. Arthur de Freitas Andrade) com CRM/RQE **[PENDENTE: registro dele]**, links das páginas (Sobre, Equipe, Contato, Privacidade), política de privacidade e linha de crise fixa (CVV 188, ver 9.3). Sem lista de links de serviços.
 
 ---
 
 ## 5. Especificação página a página
 
-### 5.1 Template padrão de página de serviço
+### 5.1 Bloco "O que atendemos" (substitui as antigas páginas de serviço)
 
-Ordem das seções:
-1. **Hero:** H1 com termo-alvo + cidade, subtítulo empático de 1 frase, CTA WhatsApp com mensagem contextual (tabela 7.1).
-2. **"Pode ser hora de buscar ajuda se..."** Sinais e sintomas na linguagem do paciente. Sem checklist diagnóstico; sempre com a nota de que apenas avaliação médica confirma diagnóstico.
-3. **Como funciona o tratamento na Open Mind:** abordagem, o que esperar da primeira consulta, acompanhamento.
-4. **Diferenciais da clínica:** 3 a 4 itens, consistentes em todas as páginas (escuta qualificada, plano individualizado, base em evidências, discrição).
-5. **Quem atende:** cards dos profissionais relacionados ao serviço, conforme o mapa serviço x profissional da seção 5.5.
-6. **FAQ:** 4 a 6 perguntas, respostas de 2 a 4 frases. Alimenta SEO e reduz fricção.
-7. **CTA final** + bloco resumido de localização.
+Grade simples de itens, sem páginas dedicadas, sem parágrafos longos e sem links para páginas inexistentes. Cada item é um rótulo curto (no máximo uma linha de apoio). Opcionalmente agrupar em "Crianças e adolescentes" e "Adultos", mais uma linha de "Serviços" para canabidiol e perícia.
 
-Requisitos: 600 a 900 palavras; revisão médica assinada visível pela responsável do serviço conforme o mapa 5.5 ("Revisado por Dra. Nome, CRM-SC X, RQE Y"); data da última revisão; JSON-LD `MedicalWebPage` + `FAQPage`; coreografia de entrada e microinterações conforme a seção 6.5.
+Itens: TEA, TDAH e TOD, Psiquiatria infantil e do adolescente, Ansiedade, estresse e burnout, Depressão e luto, Transtorno bipolar e do humor, Distúrbios do sono, Saúde mental da mulher, Tratamento com canabidiol, Perícia médica em saúde mental.
 
-### 5.2 Particularidades por página de serviço
+Regras de conteúdo:
+- Sem promessa de cura ou resultado; sem checklist de sintomas; sem autodiagnóstico.
+- Canabidiol entra como serviço médico (avaliação e acompanhamento), nunca como produto: vale a regra 9.2 mesmo num rótulo curto. Não citar marca, preço ou venda.
+- Não é necessária revisão médica assinada por item, já que não há texto clínico extenso; ainda assim, qualquer frase de apoio deve ser factual e sóbria.
 
-| Página | Termo-alvo principal | Observações de copy |
-|---|---|---|
-| /tea | psiquiatra TEA Florianópolis, avaliação de autismo | falar com os pais; jornada diagnóstica passo a passo; abordagem multidisciplinar |
-| /tdah | psiquiatra TDAH Florianópolis | cobrir adulto E infantil em seções separadas; TOD tratado dentro da página |
-| /canabidiol | médico canabidiol Florianópolis, cannabis medicinal | seguir regras da seção 9.2 à risca |
-| /medicina-do-sono | médico do sono Florianópolis, tratamento para insônia | higiene do sono, avaliação clínica; não citar exames específicos (ex.: polissonografia) sem confirmação da clínica |
-| /psiquiatria-infantil | psiquiatra infantil Florianópolis | página guarda-chuva; linka /tea e /tdah |
-| /ansiedade-e-burnout | psiquiatra para ansiedade, tratamento de burnout | dialoga com público corporativo classe A/B |
-| /depressao | psiquiatra depressão Florianópolis | inclui luto; CrisisBanner obrigatório (9.3) |
-| /transtorno-bipolar | tratamento transtorno bipolar Florianópolis | inclui transtornos do humor; CrisisBanner obrigatório |
-| /saude-mental-da-mulher | psiquiatra saúde da mulher | cobrir o tema de forma ampla, sem afirmar subserviços não confirmados; assinada pela equipe |
-| /pericia-medica | perícia médica psiquiátrica Florianópolis, perito em saúde mental | público distinto (demandas judiciais e administrativas); tom técnico e objetivo, sem promessa sobre conclusão de laudo; assinada pela Dra. Ângela |
+### 5.2 (removida)
+As páginas de serviço por condição foram descontinuadas na v1.1. A tabela de termos-alvo e particularidades por página fica preservada no histórico de versões (v1.0) caso a estratégia de SEO por condição seja retomada.
 
 ### 5.3 Home
 
 1. **Hero:** H1 "Psiquiatria humanizada em Florianópolis" (ou variação aprovada), subtítulo com proposta de valor, CTA primário WhatsApp.
 2. **Faixa de confiança:** atributos da clínica; sem números inventados, métricas reais só quando fornecidas pela gestão.
-3. **Serviços em destaque:** cards dos 3 carro-chefe (TEA, canabidiol, medicina do sono) + link para o hub.
+3. **O que atendemos:** bloco simples com a lista de patologias e serviços (ver 5.1). Sem links para páginas, sem parágrafos.
 4. **Como funciona:** 3 passos (1. chama no WhatsApp, 2. triagem acolhedora, 3. consulta agendada).
 5. **Diferenciais** (mesmos do template de serviço).
 6. **Equipe (teaser):** 3 cards (Dra. Ana Beatriz, Dra. Ângela, Dra. Patrícia) + link /equipe. **[PENDENTE: fotos em alta]**
@@ -162,7 +142,7 @@ Especialista em Psiquiatria, com atuação no Transtorno do Espectro Autista (TE
 
 **Formas de atendimento (toda a equipe):** convênio Unimed e particular.
 
-**Mapa serviço x profissional** (alimenta a seção "Quem atende" de cada página de serviço):
+**Mapa serviço x profissional** (referência interna; informa o agrupamento do bloco "O que atendemos" e a página de equipe):
 
 | Serviço | Profissionais | Observação |
 |---|---|---|
@@ -175,10 +155,10 @@ Especialista em Psiquiatria, com atuação no Transtorno do Espectro Autista (TE
 | Dependência química | fora da v1 | decisão de 10/06/2026: sem profissional que atenda hoje; reentra quando houver |
 | Perícia médica em saúde mental | Dra. Ângela | página própria confirmada: /pericia-medica |
 
-**Decisões de arquitetura aplicadas (10/06/2026):**
-- `/dependencia-quimica` removida da v1: nenhuma profissional atende o serviço hoje. Reentra quando houver médico responsável.
-- Perícia médica entra como página própria: `/pericia-medica`, assinada pela Dra. Ângela.
-- `/medicina-do-sono` tem a Dra. Ângela como autoridade; `/saude-mental-da-mulher` é assinada pela equipe.
+**Decisões de arquitetura (atualizadas em 10/06/2026, v1.1):**
+- Sem páginas de serviço: TEA, canabidiol, medicina do sono, depressão, bipolar, perícia etc. viram itens do bloco "O que atendemos" (5.1), não páginas.
+- Dependência química não aparece como serviço ofertado (nenhuma profissional atende hoje).
+- O mapa acima deixa de alimentar páginas e passa a orientar como agrupar os itens e, se útil, indicar na página de equipe quem é referência em quê (ex.: Dra. Ângela em sono e perícia; Dra. Patrícia em TEA).
 
 **[PENDENTE: fotos em alta]** Os cards e o PDF trazem fotos em recorte circular de baixa resolução. Para o site, pedir os arquivos originais, idealmente com enquadramento e fundo padronizados entre as três.
 
@@ -275,7 +255,7 @@ Texto próprio cobrindo: dados coletados (analytics), cookies e consentimento, c
 |---|---|
 | Hero (todas as páginas) | título revela linha a linha (clip-path), subtítulo fade-up +100 ms, CTA scale-in 0,95→1 +200 ms; CSS puro, sem depender de hydration |
 | Faixa de confiança | números em count-up ao entrar no viewport, 1 única vez |
-| Serviços em destaque / hub | cards fade-up com stagger de 80 ms |
+| Bloco "O que atendemos" | itens fade-up com stagger de 80 ms |
 | Como funciona (3 passos) | linha SVG se desenha conectando 1→2→3 (stroke-dashoffset) e os passos entram em sequência |
 | Diferenciais | fade-up com stagger |
 | Equipe | cards scale-in 0,96→1 com stagger |
@@ -319,21 +299,13 @@ Texto próprio cobrindo: dados coletados (analytics), cookies e consentimento, c
 
 Número: **+55 48 99128-5567**. Link base: `https://wa.me/5548991285567?text={mensagem URL-encoded}`.
 
-Mensagens pré-preenchidas por página (atribuição de origem sem ferramenta paga):
+Mensagens pré-preenchidas (sem páginas de serviço, conjunto enxuto):
 
 | Origem | Mensagem |
 |---|---|
-| Home, Sobre, Equipe, Contato | Olá! Vim pelo site da Open Mind e gostaria de agendar uma consulta. |
-| /tea | Olá! Vim pelo site da Open Mind e gostaria de informações sobre avaliação e acompanhamento de TEA. |
-| /tdah | Olá! Vim pelo site da Open Mind e gostaria de informações sobre avaliação de TDAH. |
-| /canabidiol | Olá! Vim pelo site da Open Mind e gostaria de saber sobre a avaliação para tratamento com canabidiol. |
-| /medicina-do-sono | Olá! Vim pelo site da Open Mind e gostaria de agendar uma consulta de medicina do sono. |
-| /psiquiatria-infantil | Olá! Vim pelo site da Open Mind e gostaria de agendar uma avaliação com psiquiatra infantil. |
-| /ansiedade-e-burnout | Olá! Vim pelo site da Open Mind e gostaria de informações sobre o tratamento para ansiedade e estresse. |
-| /depressao | Olá! Vim pelo site da Open Mind e gostaria de informações sobre o tratamento para depressão. |
-| /transtorno-bipolar | Olá! Vim pelo site da Open Mind e gostaria de informações sobre o acompanhamento de transtorno bipolar. |
-| /saude-mental-da-mulher | Olá! Vim pelo site da Open Mind e gostaria de informações sobre a consulta de saúde mental da mulher. |
-| /pericia-medica | Olá! Vim pelo site da Open Mind e gostaria de informações sobre perícia médica em saúde mental. |
+| Todas as páginas (Home, Sobre, Equipe, Contato) | Olá! Vim pelo site da Open Mind e gostaria de agendar uma consulta. |
+
+Opcional: um segundo botão na home/contato com a variante "...gostaria de tirar uma dúvida antes de agendar." Nada de mensagens por condição, já que não há páginas de serviço.
 
 Comportamento: abre em nova aba; dispara evento GA4 antes do redirect.
 
@@ -362,11 +334,11 @@ Telemedicina está em implementação pela clínica. Assim que a plataforma for 
 ## 8. Requisitos técnicos
 
 - **Stack:** Next.js (App Router, versão estável atual) + TypeScript + Tailwind CSS. Repo no GitHub, deploy contínuo na Vercel. Build via Claude Code.
-- **Conteúdo:** páginas estáticas (SSG). Textos de serviço em arquivos MDX ou objetos TS tipados. Sem CMS na v1; se a gestora precisar editar sozinha, reavaliar **[PENDENTE: decidir]**.
+- **Conteúdo:** páginas estáticas (SSG). Textos em objetos TS tipados. Sem CMS na v1.
 - **Performance:** LCP < 2,5 s, INP < 200 ms, CLS < 0,1. Imagens via `next/image` (AVIF/WebP), fontes self-hosted com `font-display: swap`.
 - **Motion:** biblioteca Motion (motion.dev) via `LazyMotion`; animações fora do caminho crítico de renderização; orçamento de motion: zero impacto em CLS e LCP (regras na seção 6.5).
-- **SEO técnico:** Metadata API por página, OG image por serviço, `sitemap.xml` e `robots.txt` gerados, canonical, breadcrumbs.
-- **Dados estruturados (JSON-LD):** `MedicalClinic` (home e contato: nome, NAP, geo, horários), `Physician` (equipe), `MedicalWebPage` + `FAQPage` (serviços).
+- **SEO técnico:** Metadata API por página, OG image padrão da marca, `sitemap.xml` e `robots.txt` gerados, canonical, breadcrumbs onde fizer sentido.
+- **Dados estruturados (JSON-LD):** `MedicalClinic` (home e contato: nome, NAP, geo, horários) e `Physician` (equipe). Sem `MedicalWebPage`/`FAQPage` por serviço (não há páginas de serviço); `FAQPage` só se a home mantiver FAQ.
 - **Acessibilidade:** WCAG 2.1 AA, navegação por teclado, ARIA nos componentes interativos.
 - **Privacidade técnica:** HTTPS, headers de segurança básicos, nenhum formulário coletando dado de saúde na v1 (a conversa nasce no WhatsApp).
 
@@ -386,8 +358,9 @@ Telemedicina está em implementação pela clínica. Assim que a plataforma for 
 - Tom: critérios clínicos, evidência por indicação, explicação do caminho legal de acesso via ANVISA.
 
 ### 9.3 Conteúdo sensível e protocolo de crise
-- `CrisisBanner` obrigatório em /depressao e /transtorno-bipolar, e linha fixa no footer global: "Em crise ou pensando em se machucar? Ligue 188 (CVV, 24 h) ou procure a emergência mais próxima (SAMU 192)."
-- A copy dessas páginas não dramatiza nem detalha métodos; o foco é sempre a ajuda disponível.
+- Linha de crise fixa no footer global de todas as páginas: "Em crise ou pensando em se machucar? Ligue 188 (CVV, 24 h) ou procure a emergência mais próxima (SAMU 192)." Sem animação, sempre visível.
+- Como não há mais páginas de depressão e bipolar, o footer é o local que garante a presença da linha de crise no site inteiro.
+- Qualquer texto sobre condições sensíveis (mesmo curto, no bloco "O que atendemos") não dramatiza nem detalha métodos; o foco é a ajuda disponível.
 
 ### 9.4 LGPD
 - Política de privacidade própria (5.7), banner de consentimento para cookies de analytics e ads.
@@ -397,11 +370,10 @@ Telemedicina está em implementação pela clínica. Assim que a plataforma for 
 
 ## 10. Conteúdo e SEO local
 
-- **Home:** "psiquiatra em Florianópolis", "clínica de psiquiatria Florianópolis".
-- **Páginas de serviço:** termos-alvo da tabela 5.2, sempre com variação local.
-- **E-E-A-T:** autoria e revisão médica visíveis, bios com formação e RQE, conteúdo datado e revisado.
+- **Home:** "psiquiatra em Florianópolis", "clínica de psiquiatria Florianópolis"; citar as patologias atendidas no bloco "O que atendemos" cobre parte das buscas por condição, sem páginas dedicadas.
+- **E-E-A-T:** autoria e equipe visíveis, bios com formação e RQE, RT identificado.
 - **NAP consistente** em site, Google Business Profile, Instagram e Doctoralia (perfis existentes? **[PENDENTE]**).
-- **Linkagem interna:** hub /servicos para as filhas; filhas para /equipe e /contato; psiquiatria-infantil para /tea e /tdah.
+- **Captação:** com o site enxuto, o peso de SEO recai sobre Google Business Profile e Instagram; o site dá suporte de marca e conversão.
 
 ---
 
@@ -409,11 +381,10 @@ Telemedicina está em implementação pela clínica. Assim que a plataforma for 
 
 | Fase | Entregas | Critério de aceite |
 |---|---|---|
-| **F0 Fundamentos** (sem código) | registrar domínio; confirmar razão social/CNPJ e registro do RT (Dr. Arthur); criar ou reivindicar GBP; obter arquivos do logo em vetor; fotos da equipe em alta; horários de atendimento; benchmark dos 3 concorrentes (opcional) | todos os [PENDENTE] bloqueantes resolvidos |
+| **F0 Fundamentos** (sem código) | registrar domínio; confirmar razão social/CNPJ e registro do RT (Dr. Arthur); criar ou reivindicar GBP; obter arquivos do logo em vetor; fotos da equipe em alta; horários de atendimento | pendências bloqueantes resolvidas |
 | **F1 Setup técnico** | repo, Next + Tailwind, tokens do design system (cor, tipografia e motion), componentes base, assinatura animada do logo, layout global, deploy na Vercel | preview navegável com header/footer, tokens e motion base aplicados |
-| **F2 Institucionais** | Home, Sobre, Equipe (fotos com placeholder), Contato, Privacidade | páginas completas, responsivas, CTAs funcionando |
-| **F3 Serviços** | hub + 3 carro-chefe primeiro (/tea, /canabidiol, /medicina-do-sono), depois as 7 demais | template validado no primeiro trio antes de escalar |
-| **F4 Lançamento** | GA4 + Search Console, JSON-LD validado, QA de acessibilidade, performance e motion (prefers-reduced-motion, zero CLS), go-live no domínio | Lighthouse >= 90 nas 4 categorias; eventos disparando |
+| **F2 Páginas** | Home (com bloco "O que atendemos"), Sobre, Equipe (fotos com placeholder), Contato, Privacidade | páginas completas, responsivas, CTAs funcionando, sem páginas de serviço |
+| **F4 Lançamento** | GA4 + Search Console, JSON-LD validado, QA de acessibilidade, performance e motion (prefers-reduced-motion, zero CLS), noindex desligado no domínio real | Lighthouse >= 90 nas 4 categorias; eventos disparando |
 
 A cada fase iniciada, gerar o prompt pronto para colar no Claude Code.
 
@@ -425,30 +396,32 @@ A cada fase iniciada, gerar o prompt pronto para colar no Claude Code.
 |---|---|---|---|
 | 1 | Domínio. Candidatos a checar no registro.br: openmindpsiquiatria.com.br, clinicaopenmind.com.br, openmindclinica.com.br (openmind.com.br e openmindpsicologia.com.br já pertencem a terceiros) | F0, F4 | aberto |
 | 2 | Identidade visual | F1 | PARCIAL: paleta (6.2) e tipografia (6.4) definidas, logo existente. Falta só: arquivo do logo em vetor ou alta resolução |
-| 3 | Corpo clínico | F2, F3 | PARCIAL: 3 psiquiatras com bios, CRM-SC, RQE, faixas etárias e mapa serviço x profissional completos (5.5). Falta só: fotos em alta resolução |
+| 3 | Corpo clínico | F2 | PARCIAL: 3 psiquiatras com bios, CRM-SC, RQE e faixas etárias completos (5.5). Falta só: fotos em alta resolução |
 | 4 | Razão social, CNPJ e registro do RT. Busca pública aponta "Openmind Clinica Medica Ltda", CNPJ 59.811.329/0001-85, no mesmo endereço. RT/diretor técnico confirmado: Dr. Arthur de Freitas Andrade (falta CRM-SC e RQE dele). Confirmar razão social/CNPJ com a gestora antes de publicar | rodapé, privacidade | a confirmar |
 | 5 | Convênios | FAQ, copy | RESOLVIDO: convênio Unimed + particular |
-| 6 | Telemedicina | FAQ, copy, SEO | RESOLVIDO p/ escopo: não atende ainda, em implementação; fora da copy da v1 |
+| 6 | Telemedicina | FAQ, copy | RESOLVIDO p/ escopo: não atende ainda; fora da copy da v1 |
 | 7 | Google Business Profile e Doctoralia existem? | SEO local (não bloqueia build) | aberto, prioridade baixa |
 | 8 | Tráfego pago previsto (Meta Pixel)? | F4 | RESOLVIDO: sem ads e sem pixel na v1 |
 | 9 | Horários de atendimento | Contato, schema | aberto |
 | 10 | Redes sociais | footer, NAP | RESOLVIDO: Instagram @openmind.clinicamedica; e-mail openmindclinicamedica@gmail.com |
 | 11 | Conta WhatsApp Business x comum | operacional (não bloqueia) | aberto, prioridade baixa |
 | 12 | MedScale e telemedicina: mesma plataforma? | escopo futuro | aberto |
-| 13 | Página /dependencia-quimica: nenhuma das 3 médicas atende | arquitetura, F3 | RESOLVIDO: fora da v1; reentra quando houver profissional |
-| 14 | Perícia médica (Dra. Ângela) entra como página? | arquitetura | RESOLVIDO: entra como /pericia-medica |
+| 13 | Escopo das páginas de serviço | arquitetura | RESOLVIDO (v1.1): removidas; viram bloco "O que atendemos" |
+| 14 | Perícia médica | conteúdo | RESOLVIDO (v1.1): item da lista, não página |
 | 15 | Endereço: sala 207 ou 207+208? | Contato, schema | RESOLVIDO: salas 207 e 208 |
+| 16 | Indexação do preview e domínio nas meta tags | SEO/lançamento | aberto: preview deve ficar noindex até o go-live (ver seção 13) |
 
 ---
 
 ## 13. Instruções para o agente de build (Claude Code)
 
-1. **Fonte da verdade:** este SDD. Em conflito entre criatividade e SDD, vale o SDD. Mudança estrutural (páginas, stack, escopo) só com aprovação explícita do Vinícius.
-2. **Pendências viram placeholders centralizados.** Criar `src/config/site.ts` concentrando todos os dados da clínica (NAP, CNPJ, RT, horários, domínio, redes, WhatsApp, mensagens da tabela 7.1). Itens pendentes entram com placeholder e comentário `// TODO [PENDENTE n]`. Nenhum dado pendente hardcoded espalhado pelo código.
-3. **Nunca inventar:** CRM/RQE, CNPJ, preços, estatísticas, depoimentos, convênios além da Unimed, horários, exames ou promessas clínicas. Faltou dado real, entra placeholder.
-4. **Conteúdo médico:** redigir a copy seguindo as seções 2 (tom de voz), 5.2 (particularidades por página) e 9 (conformidade). Toda página de serviço fecha com convite à avaliação individual; nunca autodiagnóstico.
-5. **Ordem de execução:** F1 → F2 → F3 (seção 11). Commit ao fim de cada fase, com os critérios de aceite verificados antes de avançar. F4 só com as pendências 1, 4 e 9 resolvidas.
-6. **Qualidade de código:** TypeScript estrito; tokens das seções 6.2, 6.4 e 6.5 implementados como design tokens (Tailwind config + CSS variables); componentes da seção 6.3; zero valores mágicos de cor, tempo ou easing.
-7. **Motion:** seguir a coreografia e as regras inegociáveis da seção 6.5 à risca, incluindo `prefers-reduced-motion` e a regra do CrisisBanner sem animação.
-8. **Assets provisórios:** logo em PNG (recebido da clínica) num componente `Logo` fácil de trocar quando o vetor chegar; fotos da equipe com placeholder no mesmo aspect ratio até as fotos em alta chegarem.
-9. **QA por fase:** build e lint limpos; Lighthouse local nas páginas novas; navegação por teclado funcionando; conferir que nenhuma página menciona dependência química como serviço ofertado.
+1. **Fonte da verdade:** este SDD (v1.1). Em conflito entre criatividade e SDD, vale o SDD. Mudança estrutural (páginas, stack, escopo) só com aprovação explícita do Vinícius.
+2. **Escopo:** site institucional enxuto. Páginas: Home, Sobre, Equipe, Contato, Privacidade. NÃO existem páginas de serviço nem hub `/servicos`. As patologias aparecem só como o bloco "O que atendemos" (5.1).
+3. **Pendências viram placeholders centralizados.** Em `src/config/site.ts` concentrar todos os dados da clínica (NAP, CNPJ, RT, horários, domínio, redes, WhatsApp). Itens pendentes com `// TODO [PENDENTE n]`. Nenhum dado pendente hardcoded espalhado.
+4. **Nunca inventar:** CRM/RQE, CNPJ, preços, estatísticas, depoimentos, convênios além da Unimed, horários, exames ou promessas clínicas. Faltou dado real, entra placeholder.
+5. **Conteúdo:** seguir as seções 2 (tom de voz) e 9 (conformidade). Sem copy longa por condição. Canabidiol citado como serviço médico, nunca produto (9.2).
+6. **Indexação:** o preview deve ficar `noindex, nofollow` até o go-live; canonical/OG não devem fixar um domínio não confirmado. Controlar por env (ver pendência 16).
+7. **Qualidade de código:** TypeScript estrito; tokens das seções 6.2, 6.4 e 6.5 como design tokens; componentes da 6.3; zero valores mágicos de cor, tempo ou easing.
+8. **Motion:** seguir a seção 6.5 à risca, incluindo `prefers-reduced-motion` e o CrisisBanner sem animação. Linha de crise (9.3) fixa no footer global.
+9. **Assets provisórios:** logo PNG num componente `Logo` fácil de trocar; fotos da equipe com placeholder no mesmo aspect ratio até as fotos em alta chegarem.
+10. **QA:** build e lint limpos; navegação por teclado; nenhuma menção a dependência química como serviço; nenhum link apontando para páginas de serviço removidas (sem 404).

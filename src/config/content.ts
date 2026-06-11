@@ -51,3 +51,33 @@ export const differentials = [
     text: "Sigilo e cuidado com a sua privacidade em todas as etapas.",
   },
 ];
+
+/** Bloco "O que atendemos" (SDD §4 / §5.1, v1.1) — só rótulos, sem páginas, links
+ *  ou CTA por item. Canabidiol entra como serviço médico, nunca produto (§9.2). */
+export const careAreas = [
+  {
+    group: "Crianças e adolescentes",
+    items: [
+      "Transtorno do Espectro Autista (TEA)",
+      "TDAH e TOD",
+      "Psiquiatria infantil e do adolescente",
+    ],
+  },
+  {
+    group: "Adultos",
+    items: [
+      "Ansiedade, estresse e burnout",
+      "Depressão e luto",
+      "Transtorno bipolar e do humor",
+      "Distúrbios do sono",
+      "Saúde mental da mulher",
+    ],
+  },
+  {
+    group: "Serviços",
+    items: [
+      "Tratamento com canabidiol (avaliação e acompanhamento médico)",
+      "Perícia médica em saúde mental",
+    ],
+  },
+];

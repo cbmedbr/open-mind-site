@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { site, whatsappMessages } from "@/config/site";
-import { featuredServices } from "@/config/services";
 import { team } from "@/config/team";
-import { brandAttributes, howItWorks } from "@/config/content";
+import { brandAttributes, howItWorks, careAreas } from "@/config/content";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ServiceCard } from "@/components/ui/ServiceCard";
 import { TeamCard } from "@/components/ui/TeamCard";
 import { MapEmbed } from "@/components/ui/MapEmbed";
 import { CTAWhatsApp } from "@/components/ui/CTAWhatsApp";
@@ -16,18 +14,9 @@ import { FinalCTA } from "@/components/ui/FinalCTA";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { buttonClass } from "@/components/ui/Button";
-import { PinIcon, ArrowRightIcon } from "@/components/ui/icons";
+import { PinIcon } from "@/components/ui/icons";
 import { staggerDelay } from "@/lib/motion";
-import { medicalClinicLd } from "@/lib/jsonld";
-
-// Blurbs curtos e conservadores (sem promessa clínica) — a copy completa é da F3.
-const featuredBlurbs: Record<string, string> = {
-  tea: "Avaliação e acompanhamento do Transtorno do Espectro Autista, a partir dos 2 anos.",
-  canabidiol:
-    "O serviço médico: avaliação de elegibilidade, prescrição e acompanhamento, dentro das normas.",
-  "medicina-do-sono":
-    "Avaliação clínica e tratamento dos distúrbios do sono, como a insônia.",
-};
+import { medicalClinicLd, faqPageLd } from "@/lib/jsonld";
 
 const ageSentence = (() => {
   const by = Object.fromEntries(team.map((m) => [m.slug, m]));
@@ -60,6 +49,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={medicalClinicLd()} />
+      <JsonLd data={faqPageLd(faq)} />
 
       {/* 1. Hero — coreografia CSS pura (SDD §5.3 / §6.5) */}
       <section className="relative overflow-hidden bg-linear-to-b from-gold-100 to-white">
@@ -103,36 +93,39 @@ export default function Home() {
         </Container>
       </div>
 
-      {/* 3. Serviços em destaque — os 3 carro-chefe (SDD §5.3) */}
+      {/* 3. O que atendemos — bloco simples, sem páginas/links/CTA (SDD §5.1 / §4, v1.1) */}
       <Section className="bg-gold-100">
         <Container>
           <Reveal>
             <SectionHeader
-              eyebrow="Áreas de cuidado"
-              title="Atendimento especializado por necessidade"
-              lead="Para crianças, adolescentes e adultos, com a profissional certa para cada caso."
+              eyebrow="O que atendemos"
+              title="Condições e serviços"
+              lead="As principais condições e serviços acompanhados pela equipe da Open Mind, para crianças, adolescentes e adultos."
             />
           </Reveal>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredServices.map((s, i) => (
-              <Reveal key={s.slug} delay={staggerDelay(i)} className="h-full">
-                <ServiceCard
-                  href={s.path}
-                  title={s.title}
-                  description={featuredBlurbs[s.slug]}
-                />
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {careAreas.map((group, i) => (
+              <Reveal key={group.group} delay={staggerDelay(i)}>
+                <div className="h-full rounded-card border border-petrol-100 bg-white p-6">
+                  <h3 className="text-h3 text-petrol-900">{group.group}</h3>
+                  <ul className="mt-4 space-y-2.5">
+                    {group.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2.5 text-petrol-700"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-pill bg-gold-500"
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </Reveal>
             ))}
           </div>
-          <Reveal delay={staggerDelay(3)} className="mt-8">
-            <Link
-              href="/servicos"
-              className="inline-flex items-center gap-1.5 font-medium text-blue-700 underline-offset-4 hover:underline"
-            >
-              Ver todos os serviços
-              <ArrowRightIcon className="h-4 w-4" />
-            </Link>
-          </Reveal>
         </Container>
       </Section>
 

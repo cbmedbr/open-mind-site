@@ -8,6 +8,10 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/ui/WhatsAppFab";
 import "./globals.css";
 
+/** Indexável só no domínio real (SDD §13.6 / PENDENTE 16). Definir
+ *  NEXT_PUBLIC_ALLOW_INDEX=true junto com NEXT_PUBLIC_SITE_URL no go-live. */
+const allowIndex = process.env.NEXT_PUBLIC_ALLOW_INDEX === "true";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url), // TODO [PENDENTE 1]: domínio definitivo
   title: {
@@ -16,15 +20,18 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  // Preview fica noindex/nofollow; canonical e og:url não fixam domínio não confirmado.
+  robots: allowIndex
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
   openGraph: {
     type: "website",
     locale: "pt_BR",
     siteName: site.name,
     title: `${site.name} · Psiquiatria humanizada em Florianópolis`,
     description: site.description,
-    url: site.url,
+    ...(allowIndex ? { url: site.url } : {}),
   },
-  // robots, sitemap e ícones (dependem do logo em vetor — PENDENTE 2): F4.
 };
 
 /**

@@ -1,12 +1,9 @@
 import { site } from "@/config/site";
 import type { TeamMember } from "@/config/team";
-import type { ServiceMeta } from "@/config/services";
-import type { ServiceContent } from "@/content/types";
-import { REVIEW_DATE_ISO } from "@/content/review";
 
 /**
- * Dados estruturados (SDD §8). Apenas dados reais — campos pendentes (geo,
- * horários, CNPJ) são omitidos até confirmação, nunca inventados.
+ * Dados estruturados (SDD §8): MedicalClinic (home/contato), Physician (equipe)
+ * e FAQPage (FAQ da home). Apenas dados reais; campos pendentes são omitidos.
  */
 
 export function medicalClinicLd() {
@@ -33,29 +30,6 @@ export function medicalClinicLd() {
     areaServed: site.address.city,
     sameAs: [site.contact.instagramUrl],
     // geo e openingHours: TODO [PENDENTE 9 / geocode] — adicionar na F4.
-  };
-}
-
-export function medicalWebPageLd(
-  meta: ServiceMeta,
-  content: ServiceContent,
-  reviewers: TeamMember[],
-) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
-    name: content.h1,
-    description: content.metaDescription,
-    url: `${site.url}${meta.path}`,
-    inLanguage: "pt-BR",
-    isPartOf: { "@id": `${site.url}/#clinic` },
-    about: { "@type": "MedicalCondition", name: meta.title },
-    lastReviewed: REVIEW_DATE_ISO,
-    reviewedBy: reviewers.map((r) => ({
-      "@type": "Physician",
-      name: r.name,
-      identifier: `CRM-SC ${r.crmSc} / RQE ${r.rqe}`,
-    })),
   };
 }
 
