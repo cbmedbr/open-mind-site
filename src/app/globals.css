@@ -141,6 +141,20 @@
     color: var(--color-petrol-900);
   }
 
+  /* O site não tem formulários (a conversa nasce no WhatsApp, SDD §8). Esconde o
+     caret de inserção "fantasma" em conteúdo não editável — o modo "caret browsing"
+     do navegador (F7) faz um cursor de texto piscar dentro de qualquer texto.
+     Campos editáveis reais mantêm o caret, caso um formulário seja adicionado. */
+  :root {
+    caret-color: transparent;
+  }
+  input,
+  textarea,
+  select,
+  [contenteditable]:not([contenteditable="false"]) {
+    caret-color: auto;
+  }
+
   /* Alvos de toque ≥ 44px garantidos via componentes; respiro padrão de seção */
 }
 
