@@ -1,62 +1,26 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
-import type { CSSProperties } from "react";
 
 /**
- * Logo PROVISÓRIO (SDD §6.1 / §13.8). O arquivo real em vetor é TODO [PENDENTE 2];
- * este componente é o ponto único de troca. Símbolo abstrato: três peças nas
- * cores da marca que se encaixam (cérebro/quebra-cabeça estilizado).
+ * Logo oficial da Open Mind (cérebro de quebra-cabeça nas 3 cores da marca).
+ * Asset: /logo-open-mind.png — PNG transparente de alta qualidade derivado do
+ * arquivo enviado pela clínica (fundo branco removido por flood-fill, brancos
+ * internos preservados). Funciona sobre qualquer fundo (claro ou petróleo).
  *
- * Assinatura animada (SDD §6.5): quando `animated`, as peças recebem `.logo-piece`
- * e a animação roda 1× por sessão. A decisão (animar / estático / reduced-motion)
- * é tomada ANTES da pintura pelo script inline no layout (classe html.logo-static).
+ * Assinatura animada (SDD §6.5): quando `animated`, o símbolo entra 1× por sessão
+ * (scale + fade via `.logo-piece`); a decisão (animar / estático / reduced-motion)
+ * é tomada antes da pintura pelo script inline do layout (html.logo-static).
  */
 
 interface LogoProps {
   className?: string;
-  /** Anima a montagem na 1ª carga da sessão (use no header). */
+  /** Anima a entrada na 1ª carga da sessão (usar no header). */
   animated?: boolean;
   /** Mostra o nome ao lado do símbolo (lockup horizontal). */
   showWordmark?: boolean;
-  /** Cor do nome — claro para uso sobre fundo escuro (footer). */
+  /** Cor do nome — claro para fundo escuro (footer). */
   tone?: "dark" | "light";
 }
-
-interface Piece {
-  cx: number;
-  cy: number;
-  fill: string;
-  style: CSSProperties;
-}
-
-// Três peças em triângulo; cada uma entra de uma direção, com stagger.
-const PIECES: Piece[] = [
-  {
-    cx: 24,
-    cy: 15,
-    fill: "var(--color-petrol-700)",
-    style: { ["--lp-y" as string]: "-9px", ["--lp-delay" as string]: "0ms" },
-  },
-  {
-    cx: 16,
-    cy: 29,
-    fill: "var(--color-blue-500)",
-    style: {
-      ["--lp-x" as string]: "-9px",
-      ["--lp-y" as string]: "5px",
-      ["--lp-delay" as string]: "120ms",
-    },
-  },
-  {
-    cx: 32,
-    cy: 29,
-    fill: "var(--color-gold-500)",
-    style: {
-      ["--lp-x" as string]: "9px",
-      ["--lp-y" as string]: "5px",
-      ["--lp-delay" as string]: "240ms",
-    },
-  },
-];
 
 export function Logo({
   className,
@@ -66,24 +30,15 @@ export function Logo({
 }: LogoProps) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <svg
-        viewBox="0 0 48 48"
-        role="img"
-        aria-label="Open Mind"
-        className="h-9 w-9 shrink-0"
-      >
-        {PIECES.map((p, i) => (
-          <circle
-            key={i}
-            cx={p.cx}
-            cy={p.cy}
-            r={9}
-            fill={p.fill}
-            className={animated ? "logo-piece" : undefined}
-            style={animated ? p.style : undefined}
-          />
-        ))}
-      </svg>
+      <Image
+        src="/logo-open-mind.png"
+        alt={showWordmark ? "" : "Open Mind"}
+        width={688}
+        height={618}
+        priority={animated}
+        sizes="40px"
+        className={cn("h-9 w-auto", animated && "logo-piece")}
+      />
       {showWordmark && (
         <span
           className={cn(
