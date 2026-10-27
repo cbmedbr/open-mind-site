@@ -67,8 +67,10 @@ export const careAreas = [
     group: "Adultos",
     items: [
       "Ansiedade, estresse e burnout",
+      "Síndrome do pânico",
       "Depressão e luto",
       "Transtorno bipolar e do humor",
+      "TDAH no adulto",
       "Distúrbios do sono",
       "Saúde mental da mulher",
     ],

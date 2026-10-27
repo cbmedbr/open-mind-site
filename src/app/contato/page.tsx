@@ -74,11 +74,14 @@ export default function ContatoPage() {
                 </li>
               </ul>
 
-              {/* Horários: TODO [PENDENTE 9] — não inventar; direcionar ao WhatsApp. */}
-              <p className="mt-6 text-[0.95rem] text-petrol-700">
-                Horários de atendimento: confirme a disponibilidade pelo
-                WhatsApp.
-              </p>
+              <div className="mt-6 text-[0.95rem] text-petrol-700">
+                <p className="font-medium text-petrol-900">
+                  Horário de atendimento
+                </p>
+                {site.hours.map((h) => (
+                  <p key={h.label}>{h.label}</p>
+                ))}
+              </div>
 
               <div className="mt-8">
                 <CTAWhatsApp

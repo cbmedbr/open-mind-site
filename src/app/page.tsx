@@ -169,7 +169,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 6. Equipe (teaser) — fotos com placeholder (SDD §5.3 / PENDENTE 3) */}
+      {/* 6. Equipe (teaser) — cards compactos, bio completa em /equipe (SDD §5.3) */}
       <Section>
         <Container>
           <Reveal>
@@ -189,7 +189,7 @@ export default function Home() {
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((member, i) => (
               <Reveal key={member.slug} delay={staggerDelay(i)} className="h-full">
-                <TeamCard member={member} />
+                <TeamCard member={member} pagePath="/" compact />
               </Reveal>
             ))}
           </div>
@@ -209,6 +209,11 @@ export default function Home() {
               <p className="mt-2 text-petrol-700">
                 {site.address.building} · {site.address.district}.
               </p>
+              {site.hours.map((h) => (
+                <p key={h.label} className="mt-2 text-petrol-700">
+                  Atendimento: {h.label.toLowerCase()}.
+                </p>
+              ))}
               <div className="mt-6">
                 <Link href="/contato" className={buttonClass("secondary", "md")}>
                   Ver contato e acesso

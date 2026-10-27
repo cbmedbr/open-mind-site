@@ -24,7 +24,7 @@ export default function EquipePage() {
 
       <PageHeader
         title="Corpo clínico"
-        lead="Psiquiatras especializadas, com formação e foco por área de atuação. Cada profissional traz a sua expertise para o cuidado certo."
+        lead="Três psiquiatras com registro no CRM-SC e RQE, que atendem por convênio Unimed e particular, sempre com escuta qualificada e planos de cuidado individualizados."
         breadcrumbs={[{ label: "Início", href: "/" }, { label: "Equipe" }]}
       />
 
@@ -33,7 +33,7 @@ export default function EquipePage() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((member, i) => (
               <Reveal key={member.slug} delay={staggerDelay(i)} className="h-full">
-                <TeamCard member={member} />
+                <TeamCard member={member} pagePath="/equipe" />
               </Reveal>
             ))}
           </div>

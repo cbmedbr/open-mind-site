@@ -47,8 +47,16 @@ export const site = {
     },
   },
 
-  /** Horários de atendimento. TODO [PENDENTE 9]: aguardando a gestão. NÃO inventar. */
-  hours: null as null | Array<{ days: string; open: string; close: string }>,
+  /** Horários de atendimento (PENDENTE 9 resolvido pela apresentação oficial da
+   *  clínica: "Seg a Sex, 9h às 19h"). `dayOfWeek`/`opens`/`closes` alimentam o JSON-LD. */
+  hours: [
+    {
+      label: "Segunda a sexta, das 9h às 19h",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "19:00",
+    },
+  ],
 
   /** Convênios (SDD §12 item 5 RESOLVIDO): Unimed + particular. Nunca adicionar outros sem confirmação. */
   insurance: { covenants: ["Unimed"] as const, privatePay: true },
@@ -84,9 +92,12 @@ export const site = {
   },
 } as const;
 
-/** Mensagens pré-preenchidas do WhatsApp (SDD §7.1). As específicas de serviço ficam em services.ts. */
+/** Mensagens pré-preenchidas do WhatsApp (SDD §7.1). */
 export const whatsappMessages = {
   /** Home, Sobre, Equipe, Contato. */
   default:
     "Olá! Vim pelo site da Open Mind e gostaria de agendar uma consulta.",
+  /** Card de cada médica: a recepção já sabe com quem agendar. */
+  withDoctor: (shortName: string) =>
+    `Olá! Vim pelo site da Open Mind e gostaria de agendar uma consulta com a ${shortName}.`,
 } as const;

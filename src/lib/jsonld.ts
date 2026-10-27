@@ -29,7 +29,13 @@ export function medicalClinicLd() {
     },
     areaServed: site.address.city,
     sameAs: [site.contact.instagramUrl],
-    // geo e openingHours: TODO [PENDENTE 9 / geocode] — adicionar na F4.
+    openingHoursSpecification: site.hours.map((h) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: h.dayOfWeek,
+      opens: h.opens,
+      closes: h.closes,
+    })),
+    // geo: TODO [geocode] — adicionar na F4.
   };
 }
 
@@ -57,5 +63,7 @@ export function physicianLd(m: TeamMember) {
       url: site.url,
     },
     identifier: `CRM-SC ${m.crmSc} / RQE ${m.rqe}`,
+    description: m.bio,
+    ...(m.photo ? { image: `${site.url}${m.photo}` } : {}),
   };
 }
